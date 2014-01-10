@@ -19,10 +19,11 @@ def is_movie(word):
     else:
         return False
 
-def print_movie(word,channel):
-    if channel="#ahd-announce":
-        name = re.search(MOVIE: ([A-Za-z \d]+)(\[\d+]).*(720p|1080p) / (\w+) / (\w+), word)
+def print_movie(word):
+    name = re.search(MOVIE: ([A-Za-z \d]+)(\[\d+]).*(720p|1080p) / (\w+) / (\w+), word)
+        if name:
         return name
+    name = re.search()
 
 
 

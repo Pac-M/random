@@ -6,7 +6,7 @@ name = re.search("MOVIE: ([A-Za-z \d]+)(\[\d+]).*(720p|1080p) / (\w+) / (\w+)", 
 
 if name:
     #print ("%s %s was released in the following format: %s %s" % name.group(1), name.group(2), name.group(2), name.group(3))
-    print name.group(1), name.group(2), name.group(3), name.group(4)
+    print "%s%s%s%s" % (name.group(1), name.group(2), name.group(3), name.group(4))
 
 
 
