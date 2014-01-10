@@ -19,11 +19,13 @@ def is_movie(word):
     else:
         return False
 
-def print_movie(word):
-    name = re.search(MOVIE: ([A-Za-z \d]+)(\[\d+]).*(720p|1080p) / (\w+) / (\w+), word)
-        if name:
-        return name
-    name = re.search()
+def return_string(word, channel):
+    name = re.search("MOVIE: ([A-Za-z \d]+)(\[\d+]).*(720p|1080p) / (\w+) / (\w+)", word)
+    if name:
+        string = "%s %s %s %s %s" % (name.group(1), name.group(2), name.group(3), name.group(4), name.group(5))
+        return string
+    name =
+
 
 
 
