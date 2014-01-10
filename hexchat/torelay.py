@@ -19,12 +19,16 @@ def is_movie(word):
     else:
         return False
 
-def return_string(word, channel):
-    name = re.search("MOVIE: ([A-Za-z \d]+)(\[\d+]).*(720p|1080p) / (\w+) / (\w+)", word)
-    if name:string = "%s %s %s %s %s" % (name.group(1), name.group(2), name.group(3), name.group(4), name.group(5))
-            return string
-    name      =me
-    name = re.search(,)
+def return_string(word):
+    name = re.search("MOVIE: ([A-Za-z \d]+)\[(\d+)] - (\w+).*(Blu-Ray|WEB-DL).*(720p|1080p) / (\w+) / (\w+)", word)
+    if name:
+        string = "%s %s %s %s %s %s" % (name.group(1), name.group(2), name.group(4), name.group(5), name.group(7), name.group(3))
+        return string
+    name = re.search("New Torrent by .* \[Movie/(Remux|Blu-Ray|720p|1080p/i)] (.*)(\d{4}) (720p|1080p).*- ?([a-zA-Z0-9]*)", word)
+    if name:
+        string = "%s %s %s %s %s" % (name.group(2), name.group(3), name.group(1), name.group(4), name.group(5))
+        return string
+    return word
 
 
 
@@ -33,7 +37,8 @@ def echo_cb(word, word_eol, user_data):
     source = cont
     if cont in allowed and is_movie(word[1]):
         cont = hexchat.find_context(channel=target)
-        output = word[1] + " \037\00304was announced on: " + source
+        reg = return_string(word[1])
+        output = reg + " \037\00304was announced on: " + source
         cont.command("say %s" % (output))
 
 
