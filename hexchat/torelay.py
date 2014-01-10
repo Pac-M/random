@@ -4,7 +4,8 @@ __module_name__ = "torelay"
 __module_version__ = "1.0"
 __module_description__ = "movie announce relay script"
 
-import hexchat
+#import hexchat
+import re
 
 target = "#target"
 allowed = ["#ahd-announce", "#HD-Torrents.Announce", "#bithq", "#gftracker-spam"]
@@ -17,6 +18,12 @@ def is_movie(word):
         return True
     else:
         return False
+
+def print_movie(word,channel):
+    if channel="#ahd-announce":
+        name = re.search(MOVIE: ([A-Za-z \d]+)(\[\d+]).*(720p|1080p) / (\w+) / (\w+), word)
+        return name
+
 
 
 def echo_cb(word, word_eol, user_data):
