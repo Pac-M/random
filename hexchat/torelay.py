@@ -18,8 +18,6 @@ def is_movie(word):
     else:
         return False
 
-def print_movie(word, channel):
-
 
 def echo_cb(word, word_eol, user_data):
     cont = hexchat.get_info("channel")
