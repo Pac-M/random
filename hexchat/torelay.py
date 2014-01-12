@@ -32,6 +32,10 @@ def return_string(word):
     if name: #gft
         string = "%s %s" % (name.group(1), name.group(2))
         return string
+    name = re.search("(DVD-R/Movies|DVD-R/Asian Cinema|High Quality) - (.*) \((\d{4})\) ([a-zA-Z0-9 /]+\b)  - (.*)"), word)
+    if name: #bithq
+        string = "%s %s %s %s" % (name.group(2), name.group(3), name.group(4), name.group(5))
+        return string
     return word
 
 
