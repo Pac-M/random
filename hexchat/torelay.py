@@ -28,9 +28,9 @@ def return_string(word):
     if name:#HD-T
         string = "%s %s %s %s %s" % (name.group(2), name.group(3), name.group(1), name.group(4), name.group(5))
         return string
-    name = re.search("NEW :: ([A-Za-z0-9 .-]*)\b :: Movies/X264-HD :: (\S*)\b", word)
+    name = re.search("NEW :: ([A-Za-z0-9 .-]*)\b :: (Movies/X264-HD|Movies/XVID) :: (\S*)\b", word)
     if name: #gft
-        string = "%s %s" % (name.group(1), name.group(2))
+        string = "%s %s" % (name.group(1), name.group(3))
         return string
     name = re.search("(DVD-R/Movies|DVD-R/Asian Cinema|High Quality) - (.*) \((\d{4})\) ([a-zA-Z0-9 /]+\b)  - (.*)", word)
     if name: #bithq
