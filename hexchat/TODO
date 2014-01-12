@@ -1,0 +1,8 @@
+TODO LIST:
+    1. Fix Regex:
+        1.1 fix ahd
+        1.2 fix hdt
+        1.3 consider fixing bithq and gft
+    2. save data to daily text files
+    3. upload text file to pastebin(or other host) every 24h
+    4. update channel topic with pastebin link
