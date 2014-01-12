@@ -24,9 +24,13 @@ def return_string(word):
     if name:
         string = "%s %s %s %s %s %s" % (name.group(1), name.group(2), name.group(4), name.group(5), name.group(7), name.group(3))
         return string
-    name = re.search("New Torrent by .* \[Movie/(Remux|Blu-Ray|720p|1080p/i)] (.*)(\d{4}) (720p|1080p).*- ?([a-zA-Z0-9]*)", word)
+    name = re.search("New Torrent by .* \[Movie/(Remux|Blu-Ray|720p|1080p/i)] (.*)(\d{4}) [A-Z a-z0-9-]*[- ]([a-zA-Z0-9]*)\b ", word)
     if name:
         string = "%s %s %s %s %s" % (name.group(2), name.group(3), name.group(1), name.group(4), name.group(5))
+        return string
+    name = re.search("NEW :: ([A-Za-z0-9 .-]*)\b :: Movies/X264-HD :: (\S*)\b", word)
+    if name:
+        string = "%s %s" % (name.group(1), name.group(2))
         return string
     return word
 
