@@ -1,4 +1,4 @@
-__author__ = 'Asi'
+__author__ = 'PacMan'
 
 __module_name__ = "torelay"
 __module_version__ = "1.0"
@@ -32,9 +32,9 @@ def return_string(word):
     if name: #gft
         string = "%s %s" % (name.group(1), name.group(2))
         return string
-    name = re.search("(DVD-R/Movies|DVD-R/Asian Cinema|High Quality) - (.*) \((\d{4})\) ([a-zA-Z0-9 /]+\b)  - (.*)"), word)
+    name = re.search("(DVD-R/Movies|DVD-R/Asian Cinema|High Quality) - (.*) \((\d{4})\) ([a-zA-Z0-9 /]+\b)  - (.*)", word)
     if name: #bithq
-        string = "%s %s %s %s" % (name.group(2), name.group(3), name.group(4), name.group(5))
+        string = "\00304%s \017%s %s %s" % (name.group(2), name.group(3), name.group(4), name.group(5))
         return string
     return word
 
@@ -47,7 +47,7 @@ def echo_cb(word, word_eol, user_data):
         cont = hexchat.find_context(channel=target)
         reg = return_string(word[1])
         #output = reg + " \037\00304was announced on: " + source
-        output = "["+source+"]" + \037\00304reg
+        output = "["+source+"]" + reg
         cont.command("say %s" % (output))
 
 
