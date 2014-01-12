@@ -47,7 +47,7 @@ def echo_cb(word, word_eol, user_data):
         cont = hexchat.find_context(channel=target)
         reg = return_string(word[1])
         #output = reg + " \037\00304was announced on: " + source
-        output = "["+source+"] " + reg
+        output = "["+source+ "] " + reg
         cont.command("say %s" % (output))
 
 
