@@ -21,15 +21,15 @@ def is_movie(word):
 
 def return_string(word):
     name = re.search("MOVIE: ([A-Za-z \d]+)\[(\d+)] - (\w+).*(Blu-Ray|WEB-DL).*(720p|1080p) / (\w+) / (\w+)", word)
-    if name:
-        string = "%s %s %s %s %s %s" % (name.group(1), name.group(2), name.group(4), name.group(5), name.group(7), name.group(3))
+    if name:#A-HD
+        string = "%s %s %s %s %s" % (name.group(1), name.group(2), name.group(5), name.group(3), name.group(7))
         return string
     name = re.search("New Torrent by .* \[Movie/(Remux|Blu-Ray|720p|1080p/i)] (.*)(\d{4}) [A-Z a-z0-9-]*[- ]([a-zA-Z0-9]*)\b ", word)
-    if name:
+    if name:#HD-T
         string = "%s %s %s %s %s" % (name.group(2), name.group(3), name.group(1), name.group(4), name.group(5))
         return string
     name = re.search("NEW :: ([A-Za-z0-9 .-]*)\b :: Movies/X264-HD :: (\S*)\b", word)
-    if name:
+    if name: #gft
         string = "%s %s" % (name.group(1), name.group(2))
         return string
     return word
