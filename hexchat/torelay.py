@@ -26,7 +26,7 @@ def return_string(word):
     """
     #AHD
     name = re.search(
-        r"MOVIE: (.*) (\[\d{4}\]) - (\S*) / (Blu-Ray|WEB-DL) / (\S*).*(x264|h.264 Remux|VC-1 Remux|MPEG2 Remux) /.* - (\b\S*\b)",
+        r"MOVIE: (.*) \[(\d{4})\] - (\S*) / (Blu-Ray|WEB-DL) / (\S*).*(x264|h.264 Remux|VC-1 Remux|MPEG2 Remux) /.* - (\b\S*\b)",
         word)
     if name:
         string = '{0:s} {1:s} {2:s} {3:s} {4:s} {5:s}'.format(name.group(1), name.group(2),
