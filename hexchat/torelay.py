@@ -20,19 +20,19 @@ def is_movie(word):
         return False
 
 def return_string(word):
-    name = re.search("MOVIE: ([A-Za-z \d]+)\[(\d+)] - (\w+).*(Blu-Ray|WEB-DL).*(720p|1080p) / (\w+) / (\w+)", word)
-    if name:#A-HD
-        string = "%s %s %s %s %s" % (name.group(1), name.group(2), name.group(5), name.group(3), name.group(7))
+    name = re.search(r"MOVIE: (.*) (\[\d{4}\]) - (\S*) / (Blu-Ray|WEB-DL) / (\S*).*(x264|h.264 Remux|VC-1 Remux|MPEG2 Remux) /.* - (\b\S*\b)", word)
+    if name:
+        string = "%s %s %s %s %s %s" % (name.group(1)[:len(name.group(1))-1], name.group(2), name.group(4), name.group(5), name.group(3), name.group(7))
         return string
-    name = re.search("New Torrent by .* \[Movie/(Remux|Blu-Ray|720p|1080p/i)] (.*)(\d{4}) [A-Z a-z0-9-]*[- ]([a-zA-Z0-9]*)\b ", word)
+    name = re.search(r"New Torrent by .* \[Movie/(Remux|Blu-Ray|720p|1080p/i)] (.*)(\d{4}) [A-Z a-z0-9-]*[- ]([a-zA-Z0-9]*)\b ", word)
     if name:#HD-T
         string = "%s %s %s %s %s" % (name.group(2), name.group(3), name.group(1), name.group(4), name.group(5))
         return string
-    name = re.search("NEW :: ([A-Za-z0-9 .-]*)\b :: (Movies/X264-HD|Movies/XVID) :: (\S*)\b", word)
+    name = re.search(r"NEW :: ([A-Za-z0-9 .-]*)\b :: (Movies/X264-HD|Movies/XVID) :: (\S*)\b", word)
     if name: #gft
         string = "%s %s" % (name.group(1), name.group(3))
         return string
-    name = re.search("(DVD-R/Movies|DVD-R/Asian Cinema|High Quality) - (.*) \((\d{4})\) ([a-zA-Z0-9 /]+\b)  - (.*)", word)
+    name = re.search(r"(DVD-R/Movies|DVD-R/Asian Cinema|High Quality) - (.*) \((\d{4})\) ([a-zA-Z0-9 /]+\b)  - (.*)", word)
     if name: #bithq
         string = "\00304%s \017%s %s %s" % (name.group(2), name.group(3), name.group(4), name.group(5))
         return string
