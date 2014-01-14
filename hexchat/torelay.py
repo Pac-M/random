@@ -35,7 +35,7 @@ def return_string(word):
         return string
     #HDT
     name = re.search(
-        r"New Torrent by .* \[Movie/(Remux|Blu-Ray|720p|1080p/i)] (.*)(\d{4}) [A-Z a-z0-9-]*[- ]([a-zA-Z0-9]*)\b ",
+        r"New Torrent by .* \[Movie/(Remux|Blu-Ray|720p|1080p/i)] (.*)\(?(\d{4})\)? [A-Z a-z0-9-]*[- ]([a-zA-Z0-9]*)\b .*(http.*)",
         word)
     if name:#HD-T
         string = "%s %s %s %s %s" % (name.group(2), name.group(3), name.group(1), name.group(4), name.group(5))
