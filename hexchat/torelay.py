@@ -6,7 +6,6 @@ __module_description__ = "movie announce relay script"
 
 import hexchat
 import re
-from time import sleep
 
 target = "#target"
 allowed = ["#ahd-announce", "#HD-Torrents.Announce", "#bithq", "#gftracker-spam"]
