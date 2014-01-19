@@ -55,6 +55,7 @@ def return_string(word):
     name = re.search(r"Movies/\S* :: (.*) :: (http\S*)", word)
     if name:
         string = "\00304%s \017%s" % (name.group(1), name.group(2))
+        return string
     return word
 
 
