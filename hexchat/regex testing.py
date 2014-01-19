@@ -1,6 +1,10 @@
 __author__ = 'Asi'
 
 import re
+from time import sleep
+
+def clear_log():
+    open('mylog.txt', 'w').close()
 
 def write_file(string):
     f = open("mylog.txt", "a")
@@ -22,7 +26,7 @@ def return_string(word):
                                                               name.group(4), name.group(5), name.group(3),
                                                               name.group(7))
         write_file(string)
-        string = '%{0:s} \017{1:s} {2:s} {3:s} {4:s} {5:s}'.format(name.group(1), name.group(2),
+        string = '\00304{0:s} \017{1:s} {2:s} {3:s} {4:s} {5:s}'.format(name.group(1), name.group(2),
                                                               name.group(4), name.group(5), name.group(3),
                                                               name.group(7))
         return string
@@ -58,6 +62,9 @@ def return_string(word):
         string = "\00304%s \017%s" % (name.group(1), name.group(2))
         return string
     return word
+
+
+clear_log()
 
 
 print return_string(

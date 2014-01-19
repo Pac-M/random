@@ -6,12 +6,12 @@ __module_description__ = "movie announce relay script"
 
 import hexchat
 import re
+from time import sleep
 
 target = "#target"
 allowed = ["#ahd-announce", "#HD-Torrents.Announce", "#bithq", "#gftracker-spam"]
 
 print "script loaded"
-
 
 def is_movie(word):
     if "movie" in word.lower():
@@ -21,14 +21,14 @@ def is_movie(word):
 
 def write_file(string):
     f = open("mylog.txt", "a")
-    string = string + "\n"
+    string += "\n"
     f.write(string)
     f.close()
 
 
 def return_string(word):
     """
-    accepts a string and return unified output for every channel
+    accepts a string and returns unified output for every channel
     """
     #AHD
     name = re.search(
@@ -39,7 +39,7 @@ def return_string(word):
                                                               name.group(4), name.group(5), name.group(3),
                                                               name.group(7))
         write_file(string)
-        string = '%{0:s} \017{1:s} {2:s} {3:s} {4:s} {5:s}'.format(name.group(1), name.group(2),
+        string = '\00304{0:s} \017{1:s} {2:s} {3:s} {4:s} {5:s}'.format(name.group(1), name.group(2),
                                                               name.group(4), name.group(5), name.group(3),
                                                               name.group(7))
         return string
@@ -70,7 +70,7 @@ def return_string(word):
     #TSH
     name = re.search(r"Movies/\S* :: (.*) :: (http\S*)", word)
     if name:
-        string = "\00304%s \017%s" % (name.group(1), name.group(2))
+        string = "%s %s" % (name.group(1), name.group(2))
         write_file(string)
         string = "\00304%s \017%s" % (name.group(1), name.group(2))
         return string
@@ -85,7 +85,6 @@ def echo_cb(word, word_eol, user_data):
         reg = return_string(word[1])
         #output = reg + " \037\00304was announced on: " + source
         output = "[" + source + "] " + reg
-        cont.command("say %s" % (output))
-
+        cont.command("say %s" % output)
 
 hexchat.hook_print("Channel Message", echo_cb)
