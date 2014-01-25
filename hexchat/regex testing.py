@@ -40,7 +40,7 @@ def return_string(word):
         string = "\00304%s \017%s %s %s %s" % (name.group(2), name.group(3), name.group(1), name.group(4), name.group(5))
         return string
     #GFT
-    name = re.search(r"NEW :: ([A-Za-z0-9 .-]*)\b :: (Movies/X264-HD|Movies/XVID) :: (\S*)\b", word)
+    name = re.search(r"NEW 4::7 ([A-Za-z0-9 .-]*)\b 4::3 (Movies/X264-HD|Movies/XVID) 4::3 (\S*)", word)
     if name: #gft
         string = "%s %s" % (name.group(1), name.group(3))
         write_file(string)
@@ -75,3 +75,5 @@ print return_string(
     "MOVIE: La grande bellezza [2013] - PublicHD / Blu-Ray /  / mkv / x264 /  / AHD Gold / DXVA - https://awesome-hd.net/torrents.php?id=9455 / https://awesome-hd.net/torrents.php?action=download&id=16942 -")
 print return_string(
     "MOVIE: Choke [2008] - KRaLiMaRKo / Blu-Ray / 1080p / mkv / x264 / DTSHD-MA / AHD Gold / DXVA - https://awesome-hd.net/torrents.php?id=6691")
+print return_string("NEW 4::7 Two.Weeks.Notice.2002.1080p.BluRay.X264-AMIABLE 4::3 Movies/X264-HD 4::3 http://www.thegft.org/details.php?id=1129163 4::3 7.67 GB 4::3 3 minutes and 4 seconds after pre.")
+print return_string("")

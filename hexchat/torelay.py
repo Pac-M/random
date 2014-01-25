@@ -52,7 +52,7 @@ def return_string(word):
         string = "\00304%s \017%s %s %s %s" % (name.group(2), name.group(3), name.group(1), name.group(4), name.group(5))
         return string
     #GFT
-    name = re.search(r"NEW :: ([A-Za-z0-9 .-]*)\b :: (Movies/X264-HD|Movies/XVID) :: (\S*)\b", word)
+    name = re.search(r"NEW 4::7 ([A-Za-z0-9 .-]*)\b 4::3 (Movies/X264-HD|Movies/XVID) 4::3 (\S*)", word)
     if name: #gft
         string = "%s %s" % (name.group(1), name.group(3))
         write_file(string)
