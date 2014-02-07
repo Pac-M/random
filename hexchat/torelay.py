@@ -25,7 +25,7 @@ def write_file(string):
     f.close()
 
 
-def return_string(word):
+def return_string(word, source):
     """
     accepts a string and returns unified output for every channel
     """
@@ -38,7 +38,7 @@ def return_string(word):
                                                               name.group(4), name.group(5), name.group(3),
                                                               name.group(7))
         write_file(string)
-        string = '\00304{0:s} \017{1:s} {2:s} {3:s} {4:s} {5:s}'.format(name.group(1), name.group(2),
+        string = '\00308{0:s} \00304{1:s} \017{2:s} {3:s} {4:s} {5:s} {6:s}'.format(source), (name.group(1), name.group(2),
                                                               name.group(4), name.group(5), name.group(3),
                                                               name.group(7))
         return string
@@ -49,14 +49,14 @@ def return_string(word):
     if name:#HD-T
         string = "%s %s %s %s %s" % (name.group(2), name.group(3), name.group(1), name.group(4), name.group(5))
         write_file(string)
-        string = "\00304%s \017%s %s %s %s" % (name.group(2), name.group(3), name.group(1), name.group(4), name.group(5))
+        string = "\00309%s \00304%s \017%s %s %s %s" % (source, name.group(2), name.group(3), name.group(1), name.group(4), name.group(5))
         return string
     #GFT
     name = re.search(r"NEW 4::7 ([A-Za-z0-9 .-]*)\b 4::3 (Movies/X264-HD|Movies/XVID|Movies/X264-SD|Movies/DVDR|Movies/BLURAY) 4::3 (\S*)", word)
     if name: #gft
         string = "%s %s" % (name.group(1), name.group(3))
         write_file(string)
-        string = "\00304%s \017%s" % (name.group(1), name.group(3))
+        string = "\00310%s \00304%s \017%s" % (source, name.group(1), name.group(3))
         return string
     #BitHQ
     name = re.search(r"(DVD-R/Movies|DVD-R/Asian Cinema|High Quality) - (.*) \((\d{4})\) ([a-zA-Z0-9 /]+\b)  - (.*)",
@@ -64,14 +64,14 @@ def return_string(word):
     if name:
         string = "%s %s %s %s" % (name.group(2), name.group(3), name.group(4), name.group(5))
         write_file(string)
-        string = "\00304%s \017%s %s %s" % (name.group(2), name.group(3), name.group(4), name.group(5))
+        string = "\00311%s \00304%s \017%s %s %s" % (source, name.group(2), name.group(3), name.group(4), name.group(5))
         return string
     #TSH
     name = re.search(r"Movies/\S* :: (.*) :: (http\S*)", word)
     if name:
         string = "%s %s" % (name.group(1), name.group(2))
         write_file(string)
-        string = "\00304%s \017%s" % (name.group(1), name.group(2))
+        string = "\00312%s \00304%s \017%s" % (source, name.group(1), name.group(2))
         return string
     return word
 
@@ -81,7 +81,7 @@ def echo_cb(word, word_eol, user_data):
     source = cont
     if cont in allowed and is_movie(word[1]):
         cont = hexchat.find_context(channel=target)
-        reg = return_string(word[1])
+        reg = return_string(word[1], source)
         #output = reg + " \037\00304was announced on: " + source
         output = "[" + source + "] " + reg
         cont.command("say %s" % output)
