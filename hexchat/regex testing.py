@@ -13,7 +13,7 @@ def write_file(string):
     f.close()
 
 
-def return_string(word):
+def return_string(word, source):
     """
     accepts a string and return unified output for every channel
     """
@@ -22,14 +22,11 @@ def return_string(word):
         r"MOVIE: (.*) \[(\d{4})\] - (\S*) / (Blu-Ray|WEB-DL) / (\S*).*(x264|h.264 Remux|VC-1 Remux|MPEG2 Remux) /.* - (\b\S*\b)",
         word)
     if name:
-        string = '{0:s} \017{1:s} {2:s} {3:s} {4:s} {5:s}'.format(name.group(1), name.group(2),
-                                                              name.group(4), name.group(5), name.group(3),
-                                                              name.group(7))
+        string = "%s %s %s %s %s %s %s" %(source, name.group(1), name.group(2), name.group(4), name.group(5), name.group(3), name.group(7))
         write_file(string)
-        string = '\00304{0:s} \017{1:s} {2:s} {3:s} {4:s} {5:s}'.format(name.group(1), name.group(2),
-                                                              name.group(4), name.group(5), name.group(3),
-                                                              name.group(7))
+        string = "\00308%s \00304%s \017%s %s %s %s %s" % (source, name.group(1), name.group(2), name.group(4), name.group(5), name.group(3), name.group(7))
         return string
+
     #HDT
     name = re.search(
         r"New Torrent by .* \[Movie/(Remux|Blu-Ray|720p|1080p/i)] (.*)\(?(\d{4})\)? [A-Z a-z0-9-]*[- ]([a-zA-Z0-9]*)\b .*(http.*)",
@@ -39,6 +36,7 @@ def return_string(word):
         write_file(string)
         string = "\00304%s \017%s %s %s %s" % (name.group(2), name.group(3), name.group(1), name.group(4), name.group(5))
         return string
+
     #GFT
     name = re.search(r"NEW 4::7 ([A-Za-z0-9 .-]*)\b 4::3 (Movies/X264-HD|Movies/XVID) 4::3 (\S*)", word)
     if name: #gft
@@ -46,6 +44,7 @@ def return_string(word):
         write_file(string)
         string = "\00304%s \017%s" % (name.group(1), name.group(3))
         return string
+
     #BitHQ
     name = re.search(r"(DVD-R/Movies|DVD-R/Asian Cinema|High Quality) - (.*) \((\d{4})\) ([a-zA-Z0-9 /]+\b)  - (.*)",
                      word)
@@ -54,6 +53,7 @@ def return_string(word):
         write_file(string)
         string = "\00304%s \017%s %s %s" % (name.group(2), name.group(3), name.group(4), name.group(5))
         return string
+
     #TSH
     name = re.search(r"Movies/\S* :: (.*) :: (http\S*)", word)
     if name:
