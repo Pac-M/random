@@ -61,19 +61,35 @@ def return_string(word, source):
         write_file(string)
         string = "\00304%s \017%s" % (name.group(1), name.group(2))
         return string
+
+    #HDB
+    name = re.search(r"New Torrent: (.*) Type: (Documentary \(H.264,Encode\)|Movie \(H.264,Encode\)|Movie \(H.264,WEB-DL\)) Internal", word)
+    if name:
+        string = "\00302%s \017%s" % (name.group(1), name.group(2))
+        write_file(string)
+        string = "\00302%s \017%s" % (name.group(1), name.group(2))
+        return string
+
     return word
 
 
 clear_log()
 
 
+# print return_string(
+#     "New Torrent by tearofthesun [Movie/1080p/i] Midsummer&#039;s Equation 2013 720p BluRay x264-WiKi (5.51 GB) uploaded! Download: https://hdts.ru/download.php?id=b14873b90363b1b192524bf339adfccc8860d2a2")
+# print return_string(
+#     "MOVIE: Flandersui gae [2000] - EbP / Blu-Ray / 720p / mkv / x264 / AC-3 - https://awesome-hd.net/torrents.php?id=9438 / https://awesome-hd.net/torrents.php?action=download&id=16885 - ")
+# print return_string(
+#     "MOVIE: La grande bellezza [2013] - PublicHD / Blu-Ray /  / mkv / x264 /  / AHD Gold / DXVA - https://awesome-hd.net/torrents.php?id=9455 / https://awesome-hd.net/torrents.php?action=download&id=16942 -")
+# print return_string(
+#     "MOVIE: Choke [2008] - KRaLiMaRKo / Blu-Ray / 1080p / mkv / x264 / DTSHD-MA / AHD Gold / DXVA - https://awesome-hd.net/torrents.php?id=6691")
+# print return_string("NEW 4::7 Two.Weeks.Notice.2002.1080p.BluRay.X264-AMIABLE 4::3 Movies/X264-HD 4::3 http://www.thegft.org/details.php?id=1129163 4::3 7.67 GB 4::3 3 minutes and 4 seconds after pre.")
+# print return_string("")
+
 print return_string(
-    "New Torrent by tearofthesun [Movie/1080p/i] Midsummer&#039;s Equation 2013 720p BluRay x264-WiKi (5.51 GB) uploaded! Download: https://hdts.ru/download.php?id=b14873b90363b1b192524bf339adfccc8860d2a2")
+    "New Torrent: Hawking 2013 720p BluRay DD5.1 x264-DON 10- Type: Documentary (H.264,Encode) Internal! - Uploaded by: Nick007", "#HDBITS")
 print return_string(
-    "MOVIE: Flandersui gae [2000] - EbP / Blu-Ray / 720p / mkv / x264 / AC-3 - https://awesome-hd.net/torrents.php?id=9438 / https://awesome-hd.net/torrents.php?action=download&id=16885 - ")
+    "New Torrent: The Messenger: The Story of Joan of Arc 1999 720p BluRay DD5.1 x264-CtrlHD 10- Type: Movie (H.264,Encode) Internal! - Uploaded by: 9mm", "#HDBITS")
 print return_string(
-    "MOVIE: La grande bellezza [2013] - PublicHD / Blu-Ray /  / mkv / x264 /  / AHD Gold / DXVA - https://awesome-hd.net/torrents.php?id=9455 / https://awesome-hd.net/torrents.php?action=download&id=16942 -")
-print return_string(
-    "MOVIE: Choke [2008] - KRaLiMaRKo / Blu-Ray / 1080p / mkv / x264 / DTSHD-MA / AHD Gold / DXVA - https://awesome-hd.net/torrents.php?id=6691")
-print return_string("NEW 4::7 Two.Weeks.Notice.2002.1080p.BluRay.X264-AMIABLE 4::3 Movies/X264-HD 4::3 http://www.thegft.org/details.php?id=1129163 4::3 7.67 GB 4::3 3 minutes and 4 seconds after pre.")
-print return_string("")
+    "New Torrent: Blood and Ties 2013 720p BluRay DD5.1 x264-CtrlHD 10- Type: Movie (H.264,Encode) Internal! - Uploaded by: Mashimaro", "#HDBITS")
