@@ -8,7 +8,7 @@ import hexchat
 import re
 
 target = "#target"
-allowed = ["#ahd-announce", "#HD-Torrents.Announce", "#bithq", "#gftracker-spam"]
+allowed = ["#ahd-announce", "#HD-Torrents.Announce", "#bithq", "#gftracker-spam", "#hdbits"]
 
 print "script loaded"
 
@@ -73,8 +73,7 @@ def return_string(word, source):
         write_file(string)
         string = "\00312[%s] \00304%s \017%s" % (source, name.group(1), name.group(2))
         return string
-
-    #HDB
+      #HDB
     name = re.search(r"New Torrent: (.*) Type: (Documentary \(H.264,Encode\)|Movie \(H.264,Encode\)|Movie \(H.264,WEB-DL\)) Internal", word)
     if name:
         string = "\00304%s \017%s" % (name.group(1), name.group(2))
