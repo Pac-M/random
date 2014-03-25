@@ -39,7 +39,7 @@ def return_string(word, source):
         #                                                       name.group(7))
         string = "%s %s %s %s %s %s" % (name.group(1), name.group(2), name.group(4), name.group(5), name.group(3), name.group(7))
         write_file(string)
-        string = "\00308[%s] \00304%s \017%s %s %s %s" % (source, name.group(1), name.group(2), name.group(4), name.group(5), name.group(3), name.group(7))
+        string = "\00308[%s] \00304%s \017%s %s %s %s %s" % (source, name.group(1), name.group(2), name.group(4), name.group(5), name.group(3), name.group(7))
         # string = '\00308{0:s} \00304{1:s} \017{2:s} {3:s} {4:s} {5:s} {6:s}'.format(source), (name.group(1), name.group(2),
         #                                                       name.group(4), name.group(5), name.group(3),
         #                                                       name.group(7))
