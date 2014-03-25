@@ -81,8 +81,8 @@ def return_string(word, source):
         string = "\00304%s \017%s" % (name.group(1), name.group(2))
         write_file(string)
         string = "\00313[%s] \00304%s \017%s" % (source, name.group(1), name.group(2))
-        #return string
-    return word
+        return string
+    #return word
 
 
 def echo_cb(word, word_eol, user_data):
