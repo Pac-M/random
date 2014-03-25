@@ -34,13 +34,15 @@ def return_string(word, source):
         r"MOVIE: (.*) \[(\d{4})\] - (\S*) / (Blu-Ray|WEB-DL) / (\S*).*(x264|h.264 Remux|VC-1 Remux|MPEG2 Remux) /.* - (\b\S*\b)",
         word)
     if name:
-        string = '{0:s} \017{1:s} {2:s} {3:s} {4:s} {5:s}'.format(name.group(1), name.group(2),
-                                                              name.group(4), name.group(5), name.group(3),
-                                                              name.group(7))
+        # string = '{0:s} \017{1:s} {2:s} {3:s} {4:s} {5:s}'.format(name.group(1), name.group(2),
+        #                                                       name.group(4), name.group(5), name.group(3),
+        #                                                       name.group(7))
+        string = "%s %s %s %s %s %s" % (name.group(1), name.group(2), name.group(4), name.group(5), name.group(3), name.group(7))
         write_file(string)
-        string = '\00308{0:s} \00304{1:s} \017{2:s} {3:s} {4:s} {5:s} {6:s}'.format(source), (name.group(1), name.group(2),
-                                                              name.group(4), name.group(5), name.group(3),
-                                                              name.group(7))
+        string = "\00308[%s] \00304%s \017%s %s %s %s" % (source, name.group(1), name.group(2), name.group(4), name.group(5), name.group(3), name.group(7))
+        # string = '\00308{0:s} \00304{1:s} \017{2:s} {3:s} {4:s} {5:s} {6:s}'.format(source), (name.group(1), name.group(2),
+        #                                                       name.group(4), name.group(5), name.group(3),
+        #                                                       name.group(7))
         return string
     #HDT
     name = re.search(
@@ -79,7 +81,7 @@ def return_string(word, source):
         string = "\00304%s \017%s" % (name.group(1), name.group(2))
         write_file(string)
         string = "\00313[%s] \00304%s \017%s" % (source, name.group(1), name.group(2))
-        return string
+        #return string
     return word
 
 
