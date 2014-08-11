@@ -22,11 +22,16 @@ def return_string(word, source):
         r"MOVIE: (.*) \[(\d{4})\] - (\S*) / (Blu-Ray|WEB-DL) / (\S*).*(x264|h.264 Remux|VC-1 Remux|MPEG2 Remux) /.* - (\b\S*\b)",
         word)
     if name:
-        string = "%s %s %s %s %s %s %s" %(source, name.group(1), name.group(2), name.group(4), name.group(5), name.group(3), name.group(7))
+        # string = '{0:s} \017{1:s} {2:s} {3:s} {4:s} {5:s}'.format(name.group(1), name.group(2),
+        #                                                       name.group(4), name.group(5), name.group(3),
+        #                                                       name.group(7))
+        string = "%s %s %s %s %s %s" % (name.group(1), name.group(2), name.group(4), name.group(5), name.group(3), name.group(7))
         write_file(string)
-        string = "\00308%s \00304%s \017%s %s %s %s %s" % (source, name.group(1), name.group(2), name.group(4), name.group(5), name.group(3), name.group(7))
+        string = "\00308[%s] \00304%s \017%s %s %s %s %s" % (source, name.group(1), name.group(2), name.group(4), name.group(5), name.group(3), name.group(7))
+        # string = '\00308{0:s} \00304{1:s} \017{2:s} {3:s} {4:s} {5:s} {6:s}'.format(source), (name.group(1), name.group(2),
+        #                                                       name.group(4), name.group(5), name.group(3),
+        #                                                       name.group(7))
         return string
-
     #HDT
     name = re.search(
         r"New Torrent by .* \[Movie/(Remux|Blu-Ray|720p|1080p/i)] (.*)\(?(\d{4})\)? [A-Z a-z0-9-]*[- ]([a-zA-Z0-9]*)\b .*(http.*)",
@@ -34,43 +39,39 @@ def return_string(word, source):
     if name:#HD-T
         string = "%s %s %s %s %s" % (name.group(2), name.group(3), name.group(1), name.group(4), name.group(5))
         write_file(string)
-        string = "\00304%s \017%s %s %s %s" % (name.group(2), name.group(3), name.group(1), name.group(4), name.group(5))
+        string = "\00309[%s] \00304%s \017%s %s %s %s" % (source, name.group(2), name.group(3), name.group(1), name.group(4), name.group(5))
         return string
-
     #GFT
-    name = re.search(r"NEW 4::7 ([A-Za-z0-9 .-]*)\b 4::3 (Movies/X264-HD|Movies/XVID) 4::3 (\S*)", word)
+    name = re.search(r"NEW 4::7 ([A-Za-z0-9 .-]*)\b 4::3 (Movies/X264-HD|Movies/XVID|Movies/X264-SD|Movies/DVDR|Movies/BLURAY) 4::3 (\S*)", word)
     if name: #gft
         string = "%s %s" % (name.group(1), name.group(3))
         write_file(string)
-        string = "\00304%s \017%s" % (name.group(1), name.group(3))
+        string = "\00310[%s] \00304%s \017%s" % (source, name.group(1), name.group(3))
         return string
-
     #BitHQ
     name = re.search(r"(DVD-R/Movies|DVD-R/Asian Cinema|High Quality) - (.*) \((\d{4})\) ([a-zA-Z0-9 /]+\b)  - (.*)",
                      word)
     if name:
         string = "%s %s %s %s" % (name.group(2), name.group(3), name.group(4), name.group(5))
         write_file(string)
-        string = "\00304%s \017%s %s %s" % (name.group(2), name.group(3), name.group(4), name.group(5))
+        string = "\00311[%s] \00304%s \017%s %s %s" % (source, name.group(2), name.group(3), name.group(4), name.group(5))
         return string
-
     #TSH
     name = re.search(r"Movies/\S* :: (.*) :: (http\S*)", word)
     if name:
-        string = "\00304%s \017%s" % (name.group(1), name.group(2))
+        string = "%s %s" % (name.group(1), name.group(2))
         write_file(string)
-        string = "\00304%s \017%s" % (name.group(1), name.group(2))
+        string = "\00312[%s] \00304%s \017%s" % (source, name.group(1), name.group(2))
         return string
-
-    #HDB
+      #HDB
     name = re.search(r"New Torrent: (.*) Type: (Documentary \(H.264,Encode\)|Movie \(H.264,Encode\)|Movie \(H.264,WEB-DL\)) Internal", word)
     if name:
-        string = "\00302%s \017%s" % (name.group(1), name.group(2))
+        string = "\00304%s \017%s" % (name.group(1), name.group(2))
         write_file(string)
-        string = "\00302%s \017%s" % (name.group(1), name.group(2))
+        string = "\00313[%s] \00304%s \017%s" % (source, name.group(1), name.group(2))
         return string
 
-    return word
+    #eturn word
 
 
 clear_log()
@@ -93,3 +94,4 @@ print return_string(
     "New Torrent: The Messenger: The Story of Joan of Arc 1999 720p BluRay DD5.1 x264-CtrlHD 10- Type: Movie (H.264,Encode) Internal! - Uploaded by: 9mm", "#HDBITS")
 print return_string(
     "New Torrent: Blood and Ties 2013 720p BluRay DD5.1 x264-CtrlHD 10- Type: Movie (H.264,Encode) Internal! - Uploaded by: Mashimaro", "#HDBITS")
+print return_string("New Torrent: Tula: The Revolt 2013 720p BluRay DTS x264-VeDeTT 10- Type: Movie (H.264,Encode) - Uploaded by: Mnml", "#hdbits")

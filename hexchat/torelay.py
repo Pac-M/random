@@ -46,12 +46,12 @@ def return_string(word, source):
         return string
     #HDT
     name = re.search(
-        r"New Torrent by .* \[Movie/(Remux|Blu-Ray|720p|1080p/i)] (.*)\(?(\d{4})\)? [A-Z a-z0-9-]*[- ]([a-zA-Z0-9]*)\b .*(http.*)",
+        r"New Torrent in category \[(Movie/720p|Movie/1080p/i)] (\D*)(\d*) (\S*).*x264-(\S*).*(https*.*)",
         word)
     if name:#HD-T
-        string = "%s %s %s %s %s" % (name.group(2), name.group(3), name.group(1), name.group(4), name.group(5))
+        string = "%s %s %s %s %s" % (name.group(2), name.group(3), name.group(4), name.group(5), name.group(6))
         write_file(string)
-        string = "\00309[%s] \00304%s \017%s %s %s %s" % (source, name.group(2), name.group(3), name.group(1), name.group(4), name.group(5))
+        string = "\00309[%s] \00304%s \017%s %s %s %s" % (source, name.group(2), name.group(3), name.group(4), name.group(5), name.group(6))
         return string
     #GFT
     name = re.search(r"NEW 4::7 ([A-Za-z0-9 .-]*)\b 4::3 (Movies/X264-HD|Movies/XVID|Movies/X264-SD|Movies/DVDR|Movies/BLURAY) 4::3 (\S*)", word)
