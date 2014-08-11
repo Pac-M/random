@@ -46,7 +46,7 @@ def return_string(word, source):
         return string
     #HDT
     name = re.search(
-        r"New Torrent in category \[(Movie/720p|Movie/1080p/i)] (\D*)(\d*) (\S*).*x264-(\S*).*(https*.*)",
+        r"New Torrent in category \[(Movie/720p|Movie/1080p/i)] (\D*)(\d*) (\S*).*[xX]264-(\S*).*(https*.*)",
         word)
     if name:#HD-T
         string = "%s %s %s %s %s" % (name.group(2), name.group(3), name.group(4), name.group(5), name.group(6))
