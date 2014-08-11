@@ -1,7 +1,7 @@
 __author__ = 'PacMan'
 
 __module_name__ = "torelay"
-__module_version__ = "1.0"
+__module_version__ = "1.1"
 __module_description__ = "movie announce relay script"
 
 import hexchat
